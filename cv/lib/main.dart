@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
             color: Colors.black,
+        
           ),
           titleLarge: GoogleFonts.lato(
             fontSize: 18.0,
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           bodySmall: GoogleFonts.lato(
             fontSize: 12.0,
             color: Colors.black54,
+            fontWeight: FontWeight.bold
           ),
         ),
       ),
@@ -148,7 +150,7 @@ class ResumeScreen extends StatelessWidget {
                   Text('Inglés intermedio', style: textTheme.bodyMedium),
                   SizedBox(height: 5),
                   LinearProgressIndicator(
-                    value: 0.6,
+                    value: 0.3,
                     backgroundColor: Colors.grey[300],
                     valueColor: AlwaysStoppedAnimation<Color>(primaryGreen),
                   ),
@@ -201,7 +203,7 @@ class ResumeScreen extends StatelessWidget {
                         SizedBox(height: 20),
                         Row(
                           children: [
-                            Icon(Icons.person_pin, color: Colors.black, size: 24),
+                            Icon(Icons.assignment, color: primaryGreen, size: 24),
                             SizedBox(width: 10),
                             Text('Nutricionista', style: textTheme.bodyLarge),
                           ],
@@ -209,7 +211,6 @@ class ResumeScreen extends StatelessWidget {
                         SizedBox(height: 5),
                         Row(
                           children: [
-                            Icon(Icons.calendar_today, color: Colors.black, size: 24),
                             SizedBox(width: 10),
                             Text('32 años de edad', style: textTheme.bodyLarge),
                           ],
@@ -322,7 +323,7 @@ class ResumeScreen extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: Colors.black, size: 20),
+          Icon(icon, color: primaryGreen, size: 20),
           SizedBox(width: 10),
           Flexible(child: Text(text, style: textTheme.bodyMedium)),
         ],
