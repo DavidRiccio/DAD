@@ -312,8 +312,8 @@ List<Widget> _buildSkillList(TextTheme textTheme) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('• ',
-                  style: textTheme.bodyMedium?.copyWith(color: primaryGreen)), // El '•' no es bold
-              Expanded(child: Text(skill, style: textTheme.bodyMedium)), // Texto en peso normal
+                  style: textTheme.bodyMedium?.copyWith(color: primaryGreen)), 
+              Expanded(child: Text(skill, style: textTheme.bodyMedium)), 
             ],
           ),
         ),
