@@ -27,6 +27,7 @@ class _LoginBaseState extends State<LoginBase> {
   final _emailCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
   String? _error;
+  bool _obscureText = true;
 
   void _validar() {
     setState(() {
@@ -76,13 +77,14 @@ class _LoginBaseState extends State<LoginBase> {
                   controller: _passCtrl,
 
                   textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Contraseña',
                     labelText: "Contraseña",
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),suffixIcon: IconButton(icon: Icon( _obscureText ? Icons.visibility : Icons.visibility_off),onPressed:(){setState(() {
+                      _obscureText = !_obscureText;
+                    });},)
                   ),
-                  obscureText: true,
-
+                  obscureText: _obscureText,
                   onSubmitted: (_) => _validar(),
                 ),
                 const SizedBox(height: 16),
