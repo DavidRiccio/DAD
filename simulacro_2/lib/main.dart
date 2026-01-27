@@ -1,55 +1,74 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const BombillaApp());
+  runApp(const ErrorAccesibleApp());
 }
 
-class BombillaApp extends StatelessWidget {
-  const BombillaApp({super.key});
+class ErrorAccesibleApp extends StatelessWidget {
+  const ErrorAccesibleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BombillaPage(),
+      home: FormPage(),
     );
   }
 }
 
-class BombillaPage extends StatefulWidget {
-  const BombillaPage({super.key});
+class FormPage extends StatefulWidget {
+  const FormPage({super.key});
 
   @override
-  State createState() => _BombillaPageState();
+  State<FormPage> createState() => _FormPageState();
 }
 
-class _BombillaPageState extends State {
-  bool encendida = false;
+class _FormPageState extends State<FormPage> {
+  final TextEditingController _emailCtrl = TextEditingController();
+  // 1. Agregamos el tipo String? y corregimos la definición de la variable
+  String? _errorMessage;
 
-  void toggle() {
+  void _validar() {
     setState(() {
-      encendida = !encendida;
+      String email = _emailCtrl.text;
+      if (!email.contains("@")) {
+        _errorMessage = "El correo debe incluir un '@'";
+      } else {
+        _errorMessage = null;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Animación implícita: Bombilla')),
-      body: Center(
+      appBar: AppBar(title: const Text('Formulario Accesible')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AnimatedOpacity(opacity: encendida ? 1 : 0.25, duration: Duration(milliseconds: 400),child: AnimatedScale(scale: encendida ? 2 : 1, duration: Duration(milliseconds: 400),child: Text("💡",style: TextStyle(fontSize: 45),),),),
-            const SizedBox(height: 18),
-            Text(encendida ? "Encendida": "Apagada")
+            const Text('Correo electrónico'),
+            const SizedBox(height: 8),
 
+            // 2. Usamos la propiedad errorText para accesibilidad nativa
+            TextField(
+              controller: _emailCtrl,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: 'usuario@email.com',
+                errorText: _errorMessage, // Flutter anuncia esto automáticamente
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            ElevatedButton(
+              onPressed: _validar,
+              child: const Text('Enviar'),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: toggle,
-        child: const Icon(Icons.power_settings_new),
       ),
     );
   }
