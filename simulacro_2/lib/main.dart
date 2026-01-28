@@ -57,9 +57,25 @@ class _FormPageState extends State<FormPage> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: 'usuario@email.com',
-                errorText: _errorMessage, // Flutter anuncia esto automáticamente
-              ),
+                error: _errorMessage != null 
+      ? Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.error_outline, 
+              color: Colors.red, 
+              size: 16,
             ),
+            const SizedBox(width: 8),
+            Text(
+              _errorMessage!,
+              style: const TextStyle(color: Colors.red, fontSize: 12),
+            ),
+          ],
+        )
+      : null,
+  ),
+),
 
             const SizedBox(height: 16),
 
